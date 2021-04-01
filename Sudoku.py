@@ -47,16 +47,27 @@ import math
 #                        [7, 1, 9, 2, 5, 4, 6, 8, 3]],
 #                        index=list(np.arange(1, 10)), columns=list(np.arange(1, 10)))
 
-df_initial = pd.DataFrame([[2, 5, np.NaN, np.NaN, np.NaN, 3, np.NaN, np.NaN, np.NaN],
-                            [np.NaN, np.NaN, np.NaN, np.NaN, np.NaN, np.NaN, 2, 7, np.NaN],
-                            [8, 7, np.NaN, np.NaN, np.NaN, 6, 4, np.NaN, np.NaN],
-                            [np.NaN, 2, np.NaN, np.NaN, np.NaN, 8, 1, 9, 3],
-                            [np.NaN, 1, 5, np.NaN, 4, np.NaN, 8, np.NaN, np.NaN],
-                            [np.NaN, np.NaN, np.NaN, 1, np.NaN, np.NaN, np.NaN, np.NaN, 4],
-                            [np.NaN, np.NaN, np.NaN, 7, 3, 4, np.NaN, np.NaN, np.NaN],
-                            [np.NaN, np.NaN, np.NaN, 6, np.NaN, np.NaN, np.NaN, np.NaN, 9],
-                            [np.NaN, 6, 4, np.NaN, np.NaN, 9, np.NaN, 5, 8]],
-                            index=list(np.arange(1, 10)), columns=list(np.arange(1, 10)))
+#df_initial = pd.DataFrame([[2, 5, np.NaN, np.NaN, np.NaN, 3, np.NaN, np.NaN, np.NaN],
+#                            [np.NaN, np.NaN, np.NaN, np.NaN, np.NaN, np.NaN, 2, 7, np.NaN],
+#                            [8, 7, np.NaN, np.NaN, np.NaN, 6, 4, np.NaN, np.NaN],
+#                            [np.NaN, 2, np.NaN, np.NaN, np.NaN, 8, 1, 9, 3],
+#                            [np.NaN, 1, 5, np.NaN, 4, np.NaN, 8, np.NaN, np.NaN],
+#                            [np.NaN, np.NaN, np.NaN, 1, np.NaN, np.NaN, np.NaN, np.NaN, 4],
+#                            [np.NaN, np.NaN, np.NaN, 7, 3, 4, np.NaN, np.NaN, np.NaN],
+#                            [np.NaN, np.NaN, np.NaN, 6, np.NaN, np.NaN, np.NaN, np.NaN, 9],
+#                            [np.NaN, 6, 4, np.NaN, np.NaN, 9, np.NaN, 5, 8]],
+#                            index=list(np.arange(1, 10)), columns=list(np.arange(1, 10)))
+
+df_initial = pd.DataFrame([[np.NaN, np.NaN, np.NaN, np.NaN, 7, 3, 9, 8, 1],
+                        [3, 4, 9, 8, 5, 1, 2, 7, 6],
+                        [8, 7, np.NaN, np.NaN, 2, 6, 4, 3, 5],
+                        [4, np.NaN, 7, 5, 6, 8, 1, 9, 3],
+                        [9, 1, 5, 3, 4, 2, 8, 6, 7],
+                        [6, 8, 3, 1, 9, 7, 5, 2, 4],
+                        [5, 9, 8, 7, np.NaN, 4, 6, 1, 2],
+                        [1, 3, 2, 6, 8, 5, 7, 4, 9],
+                        [7, 6, 4, 2, 1, 9, 3, 5, 8]],
+                        index=list(np.arange(1, 10)), columns=list(np.arange(1, 10)))
 
 df_final= pd.DataFrame([[2, 5, 6, 4, 7, 3, 9, 8, 1],
                         [3, 4, 9, 8, 5, 1, 2, 7, 6],
@@ -71,6 +82,13 @@ df_final= pd.DataFrame([[2, 5, 6, 4, 7, 3, 9, 8, 1],
 
 results_comparison = pd.DataFrame(columns=['strategy', 'steps_no', 'is_matrix_completed_correctly'])
 
+def check_corectness():
+    identical_column = []
+    for i in df.columns:
+        identical_column.append((df[i] == df_final[i]).all())
+    is_df_correct = set(identical_column) == {True}
+    return is_df_correct
+
 def find_square_side(no):
     if no in [1, 2, 3]:
         return [1, 2, 3]
@@ -81,13 +99,6 @@ def find_square_side(no):
     else:
         raise Exception('Unexpected no in df')
         
-def check_corectness():
-    identical_column = []
-    for i in df.columns:
-        identical_column.append((df[i] == df_final[i]).all())
-    is_df_correct = set(identical_column) == {True}
-    return is_df_correct
-
 def check_column(df, remaining_nums, row_idx, steps_no):
     for col_idx in remaining_nums.copy().keys():
         steps_no += 1 
@@ -145,7 +156,6 @@ def check_row(df, remaining_nums, col_idx, steps_no):
 def check_column_for_square(df, remaining_nums, steps_no):
     col_idxs = [i[1] for i in list(remaining_nums.copy().keys())]
     for col_idx in set(col_idxs):
-    # for col_idx in range(square_start_col_idx, square_start_col_idx + 3):
         steps_no += 1 
         col_temp = df.loc[:, col_idx]
         for key_temp in remaining_nums.copy().keys():
@@ -164,7 +174,6 @@ def check_column_for_square(df, remaining_nums, steps_no):
 def check_row_for_square(df, remaining_nums, steps_no):
     row_idxs = [i[0] for i in list(remaining_nums.copy().keys())]
     for row_idx in set(row_idxs):
-    # for row_idx in range(square_start_row_idx, square_start_row_idx + 3):
         steps_no += 1 
         row_temp = df.loc[row_idx, :]
         for key_temp in remaining_nums.copy().keys():
@@ -201,7 +210,6 @@ while df.isna().any().any():
     
     # Check a row
     for row_idx in df.index.copy():
-        steps_no += 1 
         row_temp = df.loc[row_idx, :]
         blank_idx = list(row_temp[row_temp.isna()].index)
         remaining_nums = get_remaining_nums(row_temp, blank_idx)
@@ -210,8 +218,10 @@ while df.isna().any().any():
         if len(remaining_nums) == 0:
             continue
         
+        steps_no += 1 
+
         # If only one num left to be added
-        elif len(remaining_nums) == 1:
+        if len(remaining_nums) == 1:
             # Add new number to our df
             df.loc[row_idx, blank_idx] = remaining_nums[blank_idx[0]][0]
             # Go to next row
@@ -236,7 +246,6 @@ while df.isna().any().any():
     
     # Check a row
     for row_idx in df.index.copy():
-        steps_no += 1 
         row_temp = df.loc[row_idx, :]
         blank_idx = list(row_temp[row_temp.isna()].index)
         remaining_nums = get_remaining_nums(row_temp, blank_idx)
@@ -245,8 +254,10 @@ while df.isna().any().any():
         if len(remaining_nums) == 0:
             continue
         
+        steps_no += 1 
+
         # If only one num left to be added
-        elif len(remaining_nums) == 1:
+        if len(remaining_nums) == 1:
             # Add new number to our df
             df.loc[row_idx, blank_idx] = remaining_nums[blank_idx[0]][0]
             # Go to next row
@@ -271,7 +282,6 @@ while df.isna().any().any():
     
     # Check a column
     for col_idx in df.index.copy():
-        steps_no += 1 
         col_temp = df.loc[:, col_idx]
         blank_idx = list(col_temp[col_temp.isna()].index)
         remaining_nums = get_remaining_nums(col_temp, blank_idx)
@@ -280,8 +290,10 @@ while df.isna().any().any():
         if len(remaining_nums) == 0:
             continue
         
+        steps_no += 1 
+
         # If only one num left to be added
-        elif len(remaining_nums) == 1:
+        if len(remaining_nums) == 1:
             # Add new number to our df
             df.loc[blank_idx, col_idx] = remaining_nums[blank_idx[0]][0]
             # Go to next row
@@ -306,18 +318,18 @@ while df.isna().any().any():
     
     # Check a column
     for col_idx in df.index.copy():
-        steps_no += 1 
         col_temp = df.loc[:, col_idx]
         blank_idx = list(col_temp[col_temp.isna()].index)
         remaining_nums = get_remaining_nums(col_temp, blank_idx)
 
-    
+        steps_no += 1 
+
         # If all numbers in the row are completed
         if len(remaining_nums) == 0:
             continue
         
         # If only one num left to be added
-        elif len(remaining_nums) == 1:
+        if len(remaining_nums) == 1:
             # Add new number to our df
             df.loc[blank_idx, col_idx] = remaining_nums[blank_idx[0]][0]
             # Go to next row
@@ -356,8 +368,10 @@ while df.isna().any().any():
             if len(remaining_nums) == 0:
                 continue
             
+            steps_no += 1 
+
             # If only one num left to be added
-            elif len(remaining_nums) == 1:
+            if len(remaining_nums) == 1:
                 # Add new number to our df
                 df.loc[list(remaining_nums.keys())[0][0], list(remaining_nums.keys())[0][1]] = list(remaining_nums.values())[0][0] # brzydkie rozwiazanie !!!
                 # Go to next square
@@ -397,8 +411,10 @@ while df.isna().any().any():
             if len(remaining_nums) == 0:
                 continue
             
+            steps_no += 1 
+
             # If only one num left to be added
-            elif len(remaining_nums) == 1:
+            if len(remaining_nums) == 1:
                 # Add new number to our df
                 df.loc[list(remaining_nums.keys())[0][0], list(remaining_nums.keys())[0][1]] = list(remaining_nums.values())[0][0] # brzydkie rozwiazanie !!!
                 # Go to next square
