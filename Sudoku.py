@@ -47,27 +47,16 @@ import math
 #                        [7, 1, 9, 2, 5, 4, 6, 8, 3]],
 #                        index=list(np.arange(1, 10)), columns=list(np.arange(1, 10)))
 
-#df_initial = pd.DataFrame([[2, 5, np.NaN, np.NaN, np.NaN, 3, np.NaN, np.NaN, np.NaN],
-#                            [np.NaN, np.NaN, np.NaN, np.NaN, np.NaN, np.NaN, 2, 7, np.NaN],
-#                            [8, 7, np.NaN, np.NaN, np.NaN, 6, 4, np.NaN, np.NaN],
-#                            [np.NaN, 2, np.NaN, np.NaN, np.NaN, 8, 1, 9, 3],
-#                            [np.NaN, 1, 5, np.NaN, 4, np.NaN, 8, np.NaN, np.NaN],
-#                            [np.NaN, np.NaN, np.NaN, 1, np.NaN, np.NaN, np.NaN, np.NaN, 4],
-#                            [np.NaN, np.NaN, np.NaN, 7, 3, 4, np.NaN, np.NaN, np.NaN],
-#                            [np.NaN, np.NaN, np.NaN, 6, np.NaN, np.NaN, np.NaN, np.NaN, 9],
-#                            [np.NaN, 6, 4, np.NaN, np.NaN, 9, np.NaN, 5, 8]],
-#                            index=list(np.arange(1, 10)), columns=list(np.arange(1, 10)))
-
-df_initial = pd.DataFrame([[np.NaN, np.NaN, np.NaN, np.NaN, 7, 3, 9, 8, 1],
-                        [3, 4, 9, 8, 5, 1, 2, 7, 6],
-                        [8, 7, np.NaN, np.NaN, 2, 6, 4, 3, 5],
-                        [4, np.NaN, 7, 5, 6, 8, 1, 9, 3],
-                        [9, 1, 5, 3, 4, 2, 8, 6, 7],
-                        [6, 8, 3, 1, 9, 7, 5, 2, 4],
-                        [5, 9, 8, 7, np.NaN, 4, 6, 1, 2],
-                        [1, 3, 2, 6, 8, 5, 7, 4, 9],
-                        [7, 6, 4, 2, 1, 9, 3, 5, 8]],
-                        index=list(np.arange(1, 10)), columns=list(np.arange(1, 10)))
+df_initial = pd.DataFrame([[2, 5, np.NaN, np.NaN, np.NaN, 3, np.NaN, np.NaN, np.NaN],
+                            [np.NaN, np.NaN, np.NaN, np.NaN, np.NaN, np.NaN, 2, 7, np.NaN],
+                            [8, 7, np.NaN, np.NaN, np.NaN, 6, 4, np.NaN, np.NaN],
+                            [np.NaN, 2, np.NaN, np.NaN, np.NaN, 8, 1, 9, 3],
+                            [np.NaN, 1, 5, np.NaN, 4, np.NaN, 8, np.NaN, np.NaN],
+                            [np.NaN, np.NaN, np.NaN, 1, np.NaN, np.NaN, np.NaN, np.NaN, 4],
+                            [np.NaN, np.NaN, np.NaN, 7, 3, 4, np.NaN, np.NaN, np.NaN],
+                            [np.NaN, np.NaN, np.NaN, 6, np.NaN, np.NaN, np.NaN, np.NaN, 9],
+                            [np.NaN, 6, 4, np.NaN, np.NaN, 9, np.NaN, 5, 8]],
+                            index=list(np.arange(1, 10)), columns=list(np.arange(1, 10)))
 
 df_final= pd.DataFrame([[2, 5, 6, 4, 7, 3, 9, 8, 1],
                         [3, 4, 9, 8, 5, 1, 2, 7, 6],
